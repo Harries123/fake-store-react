@@ -100,18 +100,17 @@ button:focus-visible {
 
 
 .read-the-docs {
-  color: #888; /* Soft gray color */
-  margin-top: 1em; /* Space above */
-  font-size: 0.9em; /* Smaller text for less importance */
+  color: #7f6df6; 
+  margin-top: 1em;
+  font-size: 0.9em;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .card {
-    padding: 1.5em; /* Reduced padding on smaller screens */
-  }
+    padding: 1.5em; 
 
   button {
-    width: 100%; /* Full-width button on mobile */
+    width: 100%; 
   }
+}
 }

@@ -6,15 +6,14 @@ import Button from '@mui/material/Button';
 
 const Add = () => {
   const [product, setProduct] = useState({
-    id: '',
+   
     title: '',
     price: '',
-    description: '',
-    category: '',
+   
+
     image: '',
     rating: {
-      rate: '',
-      count: ''
+    
     },
   });
 
@@ -56,14 +55,7 @@ const Add = () => {
 
   return (
     <Box sx={{ padding: 2 }}>
-      <TextField
-        label="ID"
-        name="id"
-        value={product.id}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
+
       <TextField
         label="Title"
         name="title"
@@ -80,22 +72,8 @@ const Add = () => {
         fullWidth
         margin="normal"
       />
-      <TextField
-        label="Description"
-        name="description"
-        value={product.description}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Category"
-        name="category"
-        value={product.category}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
+
+    
       <TextField
         label="Image URL"
         name="image"

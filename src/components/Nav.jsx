@@ -1,4 +1,5 @@
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
+import { blue } from '@mui/material/colors'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -18,10 +19,14 @@ const Nav = () => {
         
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Movie App
+          FAKE STORE 
         </Typography>
-        <Link to={'/'}><Button color="inherit">Home</Button></Link>
-        <Link to={'/add'}><Button color="inherit">Add</Button></Link>
+        <Link to={'/'}>  <Button style={{ backgroundColor: 'white', color: 'black' }}>Home</Button>
+
+        </Link>
+        <Link to={'/add'}> <Button style={{ backgroundColor: 'white',borderRadius:"black",color: 'black' }}>Add</Button>
+
+        </Link>
       </Toolbar>
     </AppBar>
   </Box>
