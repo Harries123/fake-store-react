@@ -1,4 +1,3 @@
-// Add.jsx
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -6,102 +5,90 @@ import Button from '@mui/material/Button';
 
 const Add = () => {
   const [product, setProduct] = useState({
-   
-    title: '',
-    price: '',
-   
-
-    image: '',
-    rating: {
-    
-    },
+    Title: '',
+    Productprice: '',
+    ProductRate: ''
   });
+  
+  const [errors, setErrors] = useState({});
 
- 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const fetchValue = (e) => {
+    setProduct({ ...product, [e.target.name]: e.target.value });
+  };
 
-   
-    if (name.startsWith('rating.')) {
-      const ratingField = name.split('.')[1];
-      setProduct((prevProduct) => ({
-        ...prevProduct,
-        rating: {
-          ...prevProduct.rating,
-          [ratingField]: value,
-        },
-      }));
+  const validate = () => {
+    const newErrors = {};
+    if (!product.Title) {
+      newErrors.Title = 'Title is required';
+    }
+    if (!product.Productprice || isNaN(product.Productprice) || product.Productprice <= 0) {
+      newErrors.Productprice = 'Price must be a positive number';
+    }
+    if (!product.ProductRate || isNaN(product.ProductRate) || product.ProductRate < 0 || product.ProductRate > 5) {
+      newErrors.ProductRate = 'Rate must be between 0 and 5';
+    }
+    return newErrors;
+  };
+
+  const sendData = () => {
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
     } else {
-      setProduct((prevProduct) => ({
-        ...prevProduct,
-        [name]: value,
-      }));
+      console.log(product);
+      setErrors({}); // Clear errors on successful submission
+      // You can add your data submission logic here
     }
   };
 
-  const handleSubmit = () => {
-    
-    const formattedProduct = {
-      ...product,
-      id: Number(product.id),
-      price: parseFloat(product.price),
-      rating: {
-        rate: parseFloat(product.rating.rate),
-        count: Number(product.rating.count),
-      },
-    };
-    console.log(formattedProduct);
-  };
-
   return (
-    <Box sx={{ padding: 2 }}>
+    <div>
+      <h2 style={{ paddingTop: "50px" }}>New Product</h2>
+      <Box
+        component="form"
+        sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="outlined-basic"
+          label="Title"
+          variant="outlined"
+          name='Title'
+          onChange={fetchValue}
+          error={!!errors.Title}
+          helperText={errors.Title}
+        /><br />
 
-      <TextField
-        label="Title"
-        name="title"
-        value={product.title}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Price"
-        name="price"
-        value={product.price}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
+        <TextField
+          id="filled-basic"
+          label="Product Price"
+          variant="outlined"
+          name='Productprice'
+          onChange={fetchValue}
+          error={!!errors.Productprice}
+          helperText={errors.Productprice}
+        /><br />
 
-    
-      <TextField
-        label="Image URL"
-        name="image"
-        value={product.image}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Rating (Rate)"
-        name="rating.rate"
-        value={product.rating.rate}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Rating (Count)"
-        name="rating.count"
-        value={product.rating.count}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <Button variant="contained" onClick={handleSubmit} sx={{ marginTop: 2 }}>
-        Submit
-      </Button>
-    </Box>
+        <TextField
+          id="standard-basic"
+          label="Product Rate"
+          variant="outlined"
+          name='ProductRate'
+          onChange={fetchValue}
+          error={!!errors.ProductRate}
+          helperText={errors.ProductRate}
+        /><br />
+
+        <Button
+          style={{ backgroundColor: "#333333", color: "white" }}
+          variant="contained"
+          onClick={sendData}
+        >
+          Add
+        </Button>
+      </Box>
+    </div>
   );
 };
 
